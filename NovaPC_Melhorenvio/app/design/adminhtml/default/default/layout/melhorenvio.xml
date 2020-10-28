@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addJs"><js>melhorenvio/jQuery-1.12.4.min.js</js></action>
+            <action method="addJs"><js>melhorenvio/custom.js</js></action>
+        </reference>
+    </default>
+    <melhorenvio_adminhtml_orders_index>
+        <reference name="head">
+            <action method="setTitle" translate="title">
+                <title>Pedidos</title>
+            </action>
+            <action method="addJs"><js>melhorenvio/jQuery-1.12.4.min.js</js></action>
+        </reference>
+        <reference name="content">
+            <block type="melhorenvio/adminhtml_orders" name="orders.grid" template="melhorenvio/orders/orders.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm">
+                        <params>0</params>
+                    </action>
+                </block>
+            </block>
+        </reference>
+        <reference name="js">
+            <block type="core/template" name="edit" template="melhorenvio/edit.phtml" />
+        </reference>
+    </melhorenvio_adminhtml_orders_index>
+    <melhorenvio_adminhtml_rastreio_index>
+        <reference name="head">
+            <action method="setTitle" translate="title">
+                <title>Rastreio</title>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="melhorenvio/adminhtml_rastreio" name="rastreio.grid" template="melhorenvio/rastreio/rastreio.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm">
+                        <params>0</params>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </melhorenvio_adminhtml_rastreio_index>
+    <melhorenvio_adminhtml_rastreio_edit>
+        <reference name="content">
+            <block type="melhorenvio/adminhtml_rastreio_edit" name="rastreio.status" template="melhorenvio/rastreio/custom.phtml" />
+        </reference>
+    </melhorenvio_adminhtml_rastreio_edit>
+</layout>

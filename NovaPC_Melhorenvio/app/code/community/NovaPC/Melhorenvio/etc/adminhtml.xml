@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>    
+	<menu>
+        <melhorenvio module="melhorenvio">
+            <title>Melhor Envio</title>
+            <sort_order>711</sort_order>
+            <children>
+                <orders translate="title" module="melhorenvio">
+                    <title>Pedidos</title>
+                    <sort_order>1</sort_order>
+                    <action>melhorenvio/adminhtml_orders</action>
+                </orders>
+                <rastreio translate="title" module="melhorenvio">
+                    <title>Rastreio</title>
+                    <sort_order>2</sort_order>
+                    <action>melhorenvio/adminhtml_rastreio</action>
+                </rastreio>  
+                <token translate="title" module="melhorenvio">
+                    <title>Configurações Gerais</title>
+                    <sort_order>3</sort_order>
+                    <action>adminhtml/system_config/edit/section/melhorenvio/</action>
+                </token>
+                <config translate="title" module="melhorenvio">
+                    <title>Configurações de Envios</title>
+                    <sort_order>4</sort_order>
+                    <action>adminhtml/system_config/edit/section/carriers/</action>
+                </config>           
+            </children>
+        </melhorenvio>
+    </menu>
+</config>
