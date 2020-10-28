@@ -1,0 +1,143 @@
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+	section#rastreio_section {
+		width: 100%;
+		font-family: 'Roboto', sans-serif;
+		color: #000;
+	}
+
+	h1{
+		text-align: center;
+		font-size: 24px;
+		color: #455365;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	table thead{
+		background: #FE9037;
+		border-top-right-radius: 8px;
+		border-top-left-radius: 8px;
+	}
+
+	table {
+		border: 2px solid #c3c3c3;
+	}
+
+	table thead th {
+		color: #FFF;
+		text-align: center;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		font-weight: bold;
+		padding: 4px;
+		box-shadow: 1px 2px rgba(0,0,0,.4);
+		letter-spacing: 1px;
+	}
+
+	table tbody {
+		margin-top: 5px;
+	}
+
+	table tbody td {
+		text-align: center;
+		font-size: 12px;
+		color: #000;
+		font-family: 'Roboto', sans-serif;
+		padding: 5px 2px;
+		border: 1px solid rgba(0,0,0,.4);
+	}
+</style>
+
+<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+<section id="rastreio_section">
+	<div>
+		<h1>Recuperando Rastreio</h1><br><hr><br>
+		<?php
+	
+			$rastreios = $this->getRastreio();
+
+			foreach($rastreios as $i => $rastreio){
+				$pedidoId[$i] = $rastreio['pedido'];
+				$status[$i] = is_null($rastreio['rastreio']->status) ? "null" : $rastreio['rastreio']->status;
+				$trackingValue[$i] = is_null($rastreio['rastreio']->tracking) ? "Vazio" : $rastreio['rastreio']->tracking;
+				$tracking[$i] = is_null($rastreio['rastreio']->tracking) ? "Vazio" : '<a href="https://www.melhorrastreio.com.br/rastreio/'. $rastreio['rastreio']->tracking.'" target="_blank">'.$rastreio['rastreio']->tracking.'</a>';
+				$melhorenvioTracking[$i] = is_null($rastreio['rastreio']->melhorenvio_tracking) ? "Vazio" : $rastreio['rastreio']->melhorenvio_tracking;
+				$postedAt[$i] = is_null($rastreio['rastreio']->posted_at) ? "Vazio" : date_format(date_create($rastreio['rastreio']->posted_at),"d/m/Y H:m:s");
+				$createdAt[$i] = is_null($rastreio['rastreio']->created_at) ? "Vazio" : date_format(date_create($rastreio['rastreio']->created_at),"d/m/Y H:m:s");
+				$paidAt[$i] = is_null($rastreio['rastreio']->paid_at) ? "Vazio" : date_format(date_create($rastreio['rastreio']->paid_at),"d/m/Y H:m:s");
+				$canceledAt[$i] = is_null($rastreio['rastreio']->canceled_at) ? "Vazio" : date_format(date_create($rastreio['rastreio']->canceled_at),"d/m/Y H:m:s");
+				$expiredAt[$i] = is_null($rastreio['rastreio']->expired_at) ? "Vazio" : date_format(date_create($rastreio['rastreio']->expired_at),"d/m/Y H:m:s");
+				$deliveredAt[$i] = is_null($rastreio['rastreio']->delivered_at) ? "Vazio" : date_format(date_create($rastreio['rastreio']->delivered_at),"d/m/Y H:m:s");
+
+				$status[$i] = $this->translateText($status[$i]);
+			}
+		?>
+		<div class="content-rastreio">
+			<table>
+				<thead>
+					<tr>
+						<th>Id do Pedido</th>
+						<th>Status do Envio</th>
+						<th>Código de Rastreio</th>
+						<th>Código de Rastreio Melhor Envio</th>
+						<th>Data da Postagem</th>
+						<th>Data de criação da Etiqueta</th>
+						<th>Data de pagamento da Etiqueta</th>
+						<th>Data de cancelamento da Etiqueta</th>
+						<th>Data de expiração da Etiqueta</th>
+						<th>Data de entrega do objeto</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($rastreios as $i => $rastreio) : ?>
+					<tr>
+						<td onclick="copyTextToClipboard('<?php echo $pedidoId[$i]; ?>')" style="cursor:pointer;"><?= $pedidoId[$i] ?> <ion-icon name="copy"></ion-icon></td>
+						<td><?= $status[$i] ?></td>
+						<td onclick="copyTextToClipboard('<?php echo $trackingValue[$i]; ?>')" style="cursor:pointer;"><?= $tracking[$i] ?> <ion-icon name="copy"></ion-icon></td>
+						<td onclick="copyTextToClipboard('<?php echo $melhorenvioTracking[$i]; ?>')" style="cursor:pointer;"><?= $melhorenvioTracking[$i] ?> <ion-icon name="copy"></ion-icon></td>
+						<td><?= $postedAt[$i] ?></td>
+						<td><?= $createdAt[$i] ?></td>
+						<td><?= $paidAt[$i] ?></td>
+						<td><?= $canceledAt[$i] ?></td>
+						<td><?= $expiredAt[$i] ?></td>
+						<td><?= $deliveredAt[$i] ?></td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	function fallbackCopyTextToClipboard(text) {
+		var textArea = document.createElement("textarea");
+		textArea.value = text;
+		document.body.appendChild(textArea);
+		textArea.focus();
+		textArea.select();
+
+			try {
+				var successful = document.execCommand('copy');
+				var msg = successful ? 'successful' : 'unsuccessful';
+				console.log('Fallback: Copying text command was ' + msg);
+			} catch (err) {
+				console.error('Fallback: Oops, unable to copy', err);
+			}
+
+		document.body.removeChild(textArea);
+	}
+
+	function copyTextToClipboard(text) {
+		if (!navigator.clipboard) {
+			fallbackCopyTextToClipboard(text);
+			return;
+		}
+		navigator.clipboard.writeText(text).then(function() {
+			console.log('Async: Copying to clipboard was successful!');
+		}, function(err) {
+			console.error('Async: Could not copy text: ', err);
+		});
+	}
+</script>

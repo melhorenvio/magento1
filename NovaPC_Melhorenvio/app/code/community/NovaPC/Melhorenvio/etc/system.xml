@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <melhorenvio translate="label" module="melhorenvio">
+            <label>Melhor Envio</label>
+            <sort_order>100</sort_order>
+        </melhorenvio>
+    </tabs>
+	<sections>
+        <melhorenvio translate="label" module="melhorenvio">
+            <label>Configurações Extras</label>
+            <tab>melhorenvio</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <novapc_information_group translate="label" module="melhorenvio">
+                    <label>Informações Importantes</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+                        <![CDATA[
+                            <div>
+                                <h3>Módulo Desenvolvido por<br> NovaPC - Tecnologia da Informação.</h3>
+                                <img src="https://novapc.com.br/wp-content/uploads/2019/09/logo-novapc6.png" alt="Smiley face" width="100">
+                                <br>
+                                Site: <b><a href="http://www.novapc.com.br/" target="_blank">www.novapc.com.br/</a></b>
+                                <br>
+                                E-mail: <b>novapc@novapc.com.br</b>
+                                <br>
+                                Telefones: <b style="font-size:14px">(11) 4210-5976</b> | (14) 3141-0065 | 14-2104-5600
+
+                                <br>
+                                <hr>
+                                <br>
+                            </div>
+                            <!-- Devs: Felipe Ap. & Paulo Araujo -->
+                        ]]>
+                    </comment>
+                </novapc_information_group>
+                <general translate="label" module="melhorenvio">
+                    <label>General</label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <ambiente translate="label">
+                            <label>Ambiente</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>melhorenvio/system_config_source_environment</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ambiente>
+                        <token_melhorenvio>
+                            <label>Token para Integração</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Token Gerado no seu painel Melhor Envio</comment>
+                        </token_melhorenvio>
+                    </fields>
+                </general>
+                <empresa translate="label" module="melhorenvio">
+                    <label>Configurações da Empresa</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <button_load translate="label">
+                            <label>Carregar informações do usuário no Melhor Envio</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>melhorenvio/adminhtml_system_config_source_tokenbutton</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Clique para completar os dados com os dados cadastrados na Melhor Envio</comment>
+                        </button_load>
+                        <cpf translate="label" module="melhorenvio">
+                            <label>CPF</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>NovaPC_Melhorenvio_Model_Validate_Cnpjorcpf</backend_model>
+                            <comment>CPF da pessoa</comment>
+                        </cpf>
+                        <cnpj translate="label" module="melhorenvio">
+                            <label>CNPJ</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>NovaPC_Melhorenvio_Model_Validate_Cnpjorcpf</backend_model>
+                            <comment>CNPJ da empresa</comment>
+                        </cnpj>
+                        <razao_social translate="label" module="melhorenvio">
+                            <label>Razão Social / Nome</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Razão social ou nome da empresa/pessoa</comment>
+                        </razao_social>
+                        <inscricao_estadual translate="label" module="melhorenvio">
+                            <label>Inscrição Estadual</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Inscrição Estadual da empresa.</comment>
+                        </inscricao_estadual>
+                        <email translate="label" module="melhorenvio">
+                            <label>E-mail válido</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email>
+                        <telefone translate="label" module="melhorenvio">
+                            <label>Telefone para contato</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Telefone/celular para contato com o remetente</comment>
+                        </telefone>
+                    </fields>
+                </empresa>
+                <address translate="label" module="melhorenvio">
+                    <label>Endereço da Empresa</label>
+                    <sort_order>11</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <cep translate="label" module="melhorenvio">
+                            <label>CEP</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>CEP em que a empresa é originada</comment>
+                        </cep>
+                        <rua translate="label" module="melhorenvio">
+                            <label>Endereço</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>NovaPC_Melhorenvio_Model_Validate_Address</backend_model>
+                            <comment>Endereço em que a empresa é originada</comment>
+                        </rua>
+                        <numero translate="label" module="melhorenvio">
+                            <label>Número</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Número do endereço em que a empresa é originada</comment>
+                        </numero>
+                        <complem translate="label" module="melhorenvio">
+                            <label>Complemento</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Complemento do endereço em que a empresa é originada</comment>
+                        </complem>
+                        <bairro translate="label" module="melhorenvio">
+                            <label>Bairro</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>NovaPC_Melhorenvio_Model_Validate_Address</backend_model>
+                            <comment>Bairro do endereço em que a empresa é originada</comment>
+                        </bairro>
+                        <cidade translate="label" module="melhorenvio">
+                            <label>Cidade</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>NovaPC_Melhorenvio_Model_Validate_Address</backend_model>
+                            <comment>Cidade do endereço em que a empresa é originada</comment>
+                        </cidade>
+                        <estado translate="label" module="melhorenvio">
+                            <label>Estado / UF</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <backend_model>NovaPC_Melhorenvio_Model_Validate_Address</backend_model>
+                            <comment><![CDATA[
+                            <div>
+                                <p class="note">
+                                    <span>Estado/UF do endereço em que a empresa é originada</span><br>
+                                    <span>Digite apenas as siglas em maiúsculo. Exemplo: <strong>SP</strong></span>
+                                </p>
+                            </div>
+                            <!-- Devs: Felipe Ap. & Paulo Araujo -->
+                        ]]></comment>
+                        </estado>
+                    </fields>
+                </address>
+            </groups>
+        </melhorenvio>
+		<carriers translate="label" module="melhorenvio">            
+    		<groups>
+    	      <melhorenvio translate="label"> 
+    		  <label>Nova PC - Melhor Envio</label>
+    		  <frontend_type>text</frontend_type>
+    		  <sort_order>0</sort_order>
+    		  <show_in_default>1</show_in_default>
+    		  <show_in_website>1</show_in_website>
+    		  <show_in_store>1</show_in_store>
+    		  <model>melhorenvio/carrier_melhorenvio</model>
+    	       <fields>             
+    	         <active translate="label">
+                    <label>Enabled</label>
+                    <frontend_type>select</frontend_type>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                 </active>
+                <title translate="label">
+                    <label>Title</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Título que aparecerá no Checkout</comment>
+                </title>
+                <declaracao translate="label">
+                    <label>Declaração de Valor</label>
+                    <frontend_type>select</frontend_type>
+                    <source_model>melhorenvio/system_config_source_assegurarvalor</source_model>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Informe se você utilizará declaração de valor sempre, ou somente se for necessário</comment>
+                </declaracao>
+                <mao_propria translate="label">
+                    <label>Mão Própria</label>
+                    <frontend_type>select</frontend_type>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Informe se você utilizará mão própria ou não</comment>
+                </mao_propria>
+                <aviso_de_recebimento translate="label">
+                    <label>Aviso de recebimento</label>
+                    <frontend_type>select</frontend_type>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Informe se você utilizará aviso de recebimento ou não</comment>
+                </aviso_de_recebimento>
+                <servicos>
+                    <label>Métodos Disponíveis</label>
+                    <frontend_type>multiselect</frontend_type>
+                    <source_model>melhorenvio/system_config_source_view</source_model>
+                    <sort_order>6</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Serviços Melhor envio</comment>
+                </servicos>
+                <agencia translate="label">
+                    <label>Agências JadLog Disponíveis</label>
+                    <frontend_type>multiselect</frontend_type>
+                    <source_model>melhorenvio/system_config_source_agency</source_model>
+                    <sort_order>7</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Selecione somente uma agência.</comment>
+                </agencia>
+                <sort_order translate="label">
+                    <label>Posicionamento no checkout</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>8</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>100</sort_order>
+                    <comment>Ordem de exibição no checkout</comment>
+                </sort_order>
+                <exibir_prazo translate="label">
+                    <label>Exibir prazo de entrega</label>
+                    <frontend_type>select</frontend_type>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <sort_order>9</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </exibir_prazo>
+                <adicional_prazo translate="label">
+                    <label>Adicional ao prazo de entrega (Dias)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </adicional_prazo>
+                <lucro translate="label">
+                    <label>Porcentagem de lucro sobre o frete</label>
+                    <frontend_model>melhorenvio/adminhtml_float</frontend_model>
+                    <backend_model>melhorenvio/custom</backend_model>
+                    <sort_order>11</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>Digite a porcentagem de lucro sobre o frete.</comment>
+                </lucro>
+                <validate_address translate="label">
+                    <label>Validar endereço antes de comprar a etiqueta?</label>
+                    <frontend_type>select</frontend_type>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <sort_order>12</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </validate_address>
+    		   </fields>
+    		   </melhorenvio>
+    		</groups>
+		</carriers>
+	</sections>
+</config>

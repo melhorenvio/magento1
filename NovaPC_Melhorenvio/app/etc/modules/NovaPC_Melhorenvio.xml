@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <NovaPC_Melhorenvio>
+      <active>true</active>
+      <codePool>community</codePool>            
+	        <depends>
+                <Mage_Shipping />
+            </depends>
+    </NovaPC_Melhorenvio>
+  </modules>
+</config>

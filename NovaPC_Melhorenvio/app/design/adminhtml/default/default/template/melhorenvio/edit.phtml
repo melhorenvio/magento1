@@ -1,0 +1,109 @@
+<style type="text/css">
+    .chavenfe-disabled {
+        opacity: 0.4;
+    }
+    .chavenfe-disabled:hover {
+        cursor: no-drop;
+    }
+</style>
+
+<script>
+
+jq(document).ready(function(){
+    const MelhorEnvio_Fields_Historic = {};
+
+    jq(document).on('keyup','input[name="chave_nfe"]', (event) => {
+        const nextElement = jq(event.target).nextAll("img")[0];
+        
+        if(typeof nextElement != "undefined"){
+            const orderId = nextElement.id.substring(8);
+
+            const declararConteudoSelect = jq("#declararconteudo" + orderId);
+            
+            if(typeof MelhorEnvio_Fields_Historic[orderId] == "undefined") {
+                MelhorEnvio_Fields_Historic[orderId] = {
+                    declarar_conteudo: {
+                        disabled: declararConteudoSelect.prop("disabled")
+                    }
+                };
+            }
+
+            const { declarar_conteudo } = MelhorEnvio_Fields_Historic[orderId];
+            declararConteudoSelect.prop("disabled", (event.target.value.length > 0 ? true : declarar_conteudo.disabled));
+        }
+    });
+
+    jq(document).on('click','[id^=addName]',function(){
+
+        var id = this.id;
+        var pro_id = id.substring(7);
+        var prev = jq(this).prevAll("input[type=text]").val();
+ 
+        jq.ajax({
+            url: "<?php echo Mage::helper('adminhtml')->getUrl('melhorenvio/adminhtml_orders/setNmrNf') ?>",
+            type: 'get',
+            dataType: 'json',
+            data: { id: this.id, pro_id: pro_id, text: prev },
+            beforeSend:function() {
+                Element.show('loading-mask');
+                    },
+            complete:function() {
+                Element.hide('loading-mask');
+                    },
+            success: function(transport){
+                var data = transport;
+                if(data['error'] == true) {
+                    alert(data['items']);
+                } else {
+                    alert("Atualizado");
+                }
+            }
+        });
+    });
+
+    jq(document).on('click','[id^=chavenfe]',function(){
+
+        var id = this.id;
+        var pro_id = id.substring(8);
+        var prev = jq(this).prevAll("input[type=text]").val();
+
+        const declararConteudoSelect = jq("#declararconteudo" + pro_id);
+
+        if(this.className.split(" ").indexOf("chavenfe-disabled") == -1){
+            jq.ajax({
+                url: "<?php echo Mage::helper('adminhtml')->getUrl('melhorenvio/adminhtml_orders/setChaveNfe') ?>",
+                type: 'get',
+                dataType: 'json',
+                data: { id: this.id, pro_id: pro_id, text: prev },
+                beforeSend:function() {
+                    Element.show('loading-mask');
+                        },
+                complete:function() {
+                    Element.hide('loading-mask');
+                        },
+                success: function(transport){
+                    var data = transport;
+                    if(data['error'] == true) {
+                        alert(data['items']);
+                    } else {
+                        declararConteudoSelect.prop("disabled", (prev.length > 0));
+
+                        if(typeof MelhorEnvio_Fields_Historic[pro_id] == "undefined") {
+                            MelhorEnvio_Fields_Historic[pro_id] = {
+                                declarar_conteudo: {
+                                    disabled: (prev.length > 0)
+                                }
+                            };
+                        }else{
+                            MelhorEnvio_Fields_Historic[pro_id].declarar_conteudo.disabled = (prev.length > 0);
+                        }
+
+                        alert("Chave da Nota Fiscal inserida com sucesso.");
+                    }
+                }
+            });
+        }
+    });
+});
+
+</script>
