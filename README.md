@@ -1,10 +1,5 @@
 # Módulo Melhor Envio para Magento 1
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/melhorenvio/shipment-sdk.svg?style=flat-square)](https://packagist.org/packages/melhorenvio/shipment-sdk)
-[![Build Status](https://img.shields.io/travis/melhorenvio/shipment-sdk/master.svg?style=flat-square)](https://travis-ci.org/melhorenvio/shipment-sdk)
-[![Quality Score](https://img.shields.io/scrutinizer/g/melhorenvio/shipment-sdk.svg?style=flat-square)](https://scrutinizer-ci.com/g/melhorenvio/shipment-sdk)
-[![Total Downloads](https://img.shields.io/packagist/dt/melhorenvio/shipment-sdk.svg?style=flat-square)](https://packagist.org/packages/melhorenvio/shipment-sdk)
-
 Agora ficou mais fácil ter o serviço de cotações do Melhor Envio no seu projeto de e-commerce.
 
 ## Índice
@@ -30,7 +25,7 @@ Agora ficou mais fácil ter o serviço de cotações do Melhor Envio no seu proj
 
 ### require 
 * PHP >= 5.6
-* Ext-json = *
+* Magento >= 1.9.x.x
 
 
 ## Instalação
