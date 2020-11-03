@@ -32,7 +32,7 @@ Agora ficou mais fácil ter o serviço de cotações do Melhor Envio no seu proj
 
 Você pode instalar o módulo realizando o download do mesmo e extraindo os arquivos contidos na pasta NovaPC_Melhorenvio na raiz do seu projeto Magento.
 
-Abaixo você encontra as informações básicas para a instalação do módulo, informações completas para instalação e utilização do módulo podem ser encontradas na [central de ajuda do Melhor Envio](https://ajuda.melhorenvio.com.br/pt-BR/articles/4586935-manual-de-integracao-plataforma-magento-1)
+Abaixo você encontra as informações básicas para a instalação do módulo, informações completas para instalação e utilização do módulo podem ser encontradas na [central de ajuda do Melhor Envio](https://ajuda.melhorenvio.com.br/pt-BR/articles/4586935-manual-de-integracao-plataforma-magento-1).
 
 ## Configuração inicial
 
