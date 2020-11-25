@@ -259,6 +259,7 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 	      CURLOPT_CUSTOMREQUEST => $method,
 	      CURLOPT_POSTFIELDS => json_encode($params),
 	      CURLOPT_HTTPHEADER => array(
+			"User-Agent: Magento 1/" . Mage::getVersion(),
 	        "Accept: application/json",
 	        'content-type: application/json',
 	        "Authorization: Bearer ".$this->_token,
