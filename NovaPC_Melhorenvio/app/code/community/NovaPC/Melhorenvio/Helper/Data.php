@@ -109,6 +109,12 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 		return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $cnpj_cpf);
 	}
 
+	public function isCNPJ($valor){
+		$valor = trim($valor);
+        $valor = str_replace(array(".", ",", "-", "/"), "", $valor);
+        return (strlen($valor) == 14);
+	}
+
 	public function getServicos(){
 	    $url = $this->_url_init."api/v2/me/shipment/services";
 	    return $this->webServiceRequest($url);

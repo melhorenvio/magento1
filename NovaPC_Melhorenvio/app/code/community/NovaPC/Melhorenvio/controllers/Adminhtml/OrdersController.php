@@ -211,7 +211,6 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
                     "name" => $o->getData('customer_firstname')." ".$o->getData('customer_lastname'),
                     "phone" => $o->getShippingAddress()->getTelephone(),
                     "email" => $o->getData('customer_email'),
-                    "document" => Mage::helper('melhorenvio')->formatCnpjCpf($o->getData('customer_taxvat')),
                     "address" => $street,
                     "complement" => $o->getShippingAddress()->getStreet()[2],
                     "number" => $o->getShippingAddress()->getStreet()[1],
@@ -253,6 +252,14 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
                 $params["from"]["company_document"] = $cnpj;
             }else{
                 $params["from"]["document"] = $cpf;
+            }
+
+            $customer_document = Mage::helper('melhorenvio')->formatCnpjCpf($o->getData('customer_taxvat'));
+
+            if(Mage::helper('melhorenvio')->isCNPJ($customer_document)){
+                $params["to"]["company_document"] = $customer_document;
+            }else{
+                $params["to"]["document"] = $customer_document;
             }
             
             $url = Mage::helper('melhorenvio')->getEnvironment() . "api/v2/me/cart";
