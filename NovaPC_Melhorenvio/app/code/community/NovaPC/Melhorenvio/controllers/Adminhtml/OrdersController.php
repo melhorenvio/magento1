@@ -160,7 +160,7 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
                 $allProducts[$item->getProductId()] = array(
                     "name" => $item->getName(),
                     "weight" => $item->getData('weight'),
-                    "unitary_value" => $item->getPrice()
+                    "unitary_value" => (float)$item->getPrice()
                 );
             }
 
@@ -183,7 +183,7 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
 
                             array_push($products[$i], $product_info);
 
-                            $prices[$i] += (float)$product_info["unitary_value"] * (int)$product->quantity;
+                            $prices[$i] += $product_info["unitary_value"] * (int)$product->quantity;
                         }
                         
                     }
