@@ -110,10 +110,10 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 	}
 
 	public function isCNPJ($valor){
-		$valor = trim($valor);
+        $valor = trim($valor);
         $valor = str_replace(array(".", ",", "-", "/"), "", $valor);
         return (strlen($valor) == 14);
-	}
+    }
 
 	public function getServicos(){
 	    $url = $this->_url_init."api/v2/me/shipment/services";
