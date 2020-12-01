@@ -110,8 +110,7 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 	}
 
 	public function isCNPJ($valor){
-        $valor = trim($valor);
-        $valor = str_replace(array(".", ",", "-", "/"), "", $valor);
+        $valor = preg_replace('/\D/', '', $valor);
         return (strlen($valor) == 14);
     }
 
