@@ -160,8 +160,7 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
                 $allProducts[$item->getProductId()] = array(
                     "name" => $item->getName(),
                     "weight" => $item->getData('weight'),
-                    "unitary_value" => $item->getPrice(),
-                    "quantity" => (int)$item->getQtyOrdered()
+                    "unitary_value" => (float)$item->getPrice()
                 );
             }
 
@@ -179,8 +178,12 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
                         $prices[$i] = 0;
 
                         foreach ($pkg->products as $product){
-                            array_push($products[$i], $allProducts[$product->id]);
-                            $prices[$i] += (float)$allProducts[$product->id]["unitary_value"] * (int)$product->quantity;
+                            $product_info = $allProducts[$product->id];
+                            $product_info["quantity"] = $product->quantity;
+
+                            array_push($products[$i], $product_info);
+
+                            $prices[$i] += $product_info["unitary_value"] * (int)$product->quantity;
                         }
                         
                     }
@@ -211,7 +214,6 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
                     "name" => $o->getData('customer_firstname')." ".$o->getData('customer_lastname'),
                     "phone" => $o->getShippingAddress()->getTelephone(),
                     "email" => $o->getData('customer_email'),
-                    "document" => Mage::helper('melhorenvio')->formatCnpjCpf($o->getData('customer_taxvat')),
                     "address" => $street,
                     "complement" => $o->getShippingAddress()->getStreet()[2],
                     "number" => $o->getShippingAddress()->getStreet()[1],
@@ -253,6 +255,14 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
                 $params["from"]["company_document"] = $cnpj;
             }else{
                 $params["from"]["document"] = $cpf;
+            }
+
+            $customer_document = Mage::helper('melhorenvio')->formatCnpjCpf($o->getData('customer_taxvat'));
+
+            if(Mage::helper('melhorenvio')->isCNPJ($customer_document)){
+                $params["to"]["company_document"] = $customer_document;
+            }else{
+                $params["to"]["document"] = $customer_document;
             }
             
             $url = Mage::helper('melhorenvio')->getEnvironment() . "api/v2/me/cart";

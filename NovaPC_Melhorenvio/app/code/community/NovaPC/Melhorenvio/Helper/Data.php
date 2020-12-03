@@ -109,6 +109,11 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 		return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $cnpj_cpf);
 	}
 
+	public function isCNPJ($valor){
+        $valor = preg_replace('/\D/', '', $valor);
+        return (strlen($valor) == 14);
+    }
+
 	public function getServicos(){
 	    $url = $this->_url_init."api/v2/me/shipment/services";
 	    return $this->webServiceRequest($url);
@@ -247,36 +252,37 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
 	public function webServiceRequest($url = null, $params = null, $method = "GET"){
-	    $curl = curl_init();
+        $curl = curl_init();
 
-	    curl_setopt_array($curl, array(
-	      CURLOPT_URL => $url,
-	      CURLOPT_RETURNTRANSFER => true,
-	      CURLOPT_ENCODING => "",
-	      CURLOPT_MAXREDIRS => 10,
-	      CURLOPT_TIMEOUT => 30,
-	      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	      CURLOPT_CUSTOMREQUEST => $method,
-	      CURLOPT_POSTFIELDS => json_encode($params),
-	      CURLOPT_HTTPHEADER => array(
-	        "Accept: application/json",
-	        'content-type: application/json',
-	        "Authorization: Bearer ".$this->_token,
-	        "Connection: keep-alive",
-	        "accept-encoding: gzip, deflate",
-	      ),
-	    ));
-	    $response = curl_exec($curl);
-	    $err = curl_error($curl);
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $url,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => $method,
+          CURLOPT_POSTFIELDS => json_encode($params),
+          CURLOPT_HTTPHEADER => array(
+            "User-Agent: Magento 1/" . Mage::getVersion(),
+            "Accept: application/json",
+            'content-type: application/json',
+            "Authorization: Bearer ".$this->_token,
+            "Connection: keep-alive",
+            "accept-encoding: gzip, deflate",
+          ),
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
 
-	    curl_close($curl);
+        curl_close($curl);
 
-	    if ($err) {
-	      return array("error" => $err);
-	    }else {
-	      return json_decode($response);
-	    }
-	}
+        if ($err) {
+          return array("error" => $err);
+        }else {
+          return json_decode($response);
+        }
+    }
 
 	public function validateAddress($cep, $address, $extras)
 	{
