@@ -156,12 +156,6 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 		return $this->webServiceRequest($url);
 	}
 
-	public function getUserDataFromMelhorEnvio()
-	{
-		$url = $this->_url_init."api/v2/me";
-		return $this->webServiceRequest($url);
-	}
-
 	public function calcularFrete($servicos, $assegurar_valor, $toCep = null, $fromCep = null, $quote = null){
 		foreach ($quote->getAllItems() as $key => $item) {
             $produto = Mage::getModel('catalog/product')->load($item->getProduct()->getId());
