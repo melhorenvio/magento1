@@ -2,6 +2,10 @@
 
 Todas as mudanças relevantes em `magento1` serão documentadas neste arquivo.
 
+## 1.0.3 - 2021-04
+
+* Remoção de validação de CNPJ nas configurações gerais do módulo
+
 ## 1.0.2 - 2020-12
 
 * Adicionado User Agent nas requisições realizadas à API do Melhor Envio

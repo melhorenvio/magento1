@@ -73,14 +73,6 @@
           </melhorenvio>
         </observers>
       </sales_order_save_after>
-      <controller_action_postdispatch_adminhtml_system_config_save>
-        <observers>
-          <controller_action_postdispatch_adminhtml_system_config_save_handle>
-            <class>melhorenvio/observer</class>
-            <method>validateDataSavedInSystemXml</method>
-          </controller_action_postdispatch_adminhtml_system_config_save_handle>
-        </observers>
-      </controller_action_postdispatch_adminhtml_system_config_save>
     </events>
   </global> 
   <admin>
