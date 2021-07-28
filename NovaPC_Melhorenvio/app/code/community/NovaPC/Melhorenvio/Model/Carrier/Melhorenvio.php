@@ -20,7 +20,7 @@
             $result = Mage::getModel('shipping/rate_result');
 
             foreach($fretes as $frete){
-                if(!isset($frete->error)){
+                if(!isset($frete->error) && !isset($frete->errors)){
                     $lucro = str_replace(',','.', Mage::getStoreConfig('carriers/melhorenvio/lucro'));
                     $lucro = str_replace('%', '', $lucro);
                     $price = $frete->price + ($frete->price*($lucro/100));
