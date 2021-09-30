@@ -24,6 +24,11 @@
                     $lucro = str_replace(',','.', Mage::getStoreConfig('carriers/melhorenvio/lucro'));
                     $lucro = str_replace('%', '', $lucro);
                     $price = $frete->price + ($frete->price*($lucro/100));
+					
+					if($price == 0 || $price == '0' || $price == 0.00) {
+						continue;
+					}
+					
                     $title = $frete->company->name." ".$frete->name;
                     if(Mage::getStoreConfig('carriers/melhorenvio/exibir_prazo') == 1){
                         $title.= " (" .Mage::helper('melhorenvio')->getDeliveryTime($frete). " dias úteis) - ";
