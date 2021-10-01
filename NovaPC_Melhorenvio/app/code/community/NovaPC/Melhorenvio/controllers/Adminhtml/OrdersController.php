@@ -179,7 +179,7 @@ class NovaPC_Melhorenvio_Adminhtml_OrdersController extends Mage_Adminhtml_Contr
 
                         foreach ($pkg->products as $product){
                             $product_info = $allProducts[$product->id];
-                            $product_info["quantity"] = $product->quantity;
+                            $product_info["quantity"] = (int)$product->quantity;
 
                             array_push($products[$i], $product_info);
 
