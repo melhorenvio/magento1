@@ -178,7 +178,7 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
                 "height" => $produto->getData('altura'),
                 "length" => $produto->getData('largura'),
                 "width" => $produto->getData('comprimento'),
-                "quantity" => $qty,
+                "quantity" => (int)$qty,
                 "insurance_value" => ($assegurar_valor ? $item->getPrice() : 0),
             );
 		}
