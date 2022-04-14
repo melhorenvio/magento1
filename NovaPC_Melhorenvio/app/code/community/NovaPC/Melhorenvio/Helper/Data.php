@@ -3,7 +3,6 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 {
 	const TOKEN_MELHORENVIO = 'melhorenvio/general/token_melhorenvio';
     const ENABLE_MELHORENVIO = 'carriers/melhorenvio/active';
-    private $token_ob_mageshop;
 
 	protected $_token = NULL;
 	protected $_url_init = NULL;
