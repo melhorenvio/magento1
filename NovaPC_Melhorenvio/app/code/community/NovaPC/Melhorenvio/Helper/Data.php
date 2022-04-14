@@ -1,15 +1,14 @@
 <?php
 class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 {
-	const TOKEN_MELHORENVIO = 'melhorenvio/general/token_melhorenvio';
-    const ENABLE_MELHORENVIO = 'carriers/melhorenvio/active';
-
 	protected $_token = NULL;
 	protected $_url_init = NULL;
+	protected $_is_enable = NULL;
 
 	public function __construct(){
 		$this->_url_init = $this->getEnvironment();
 		$this->_token = Mage::getStoreConfig('melhorenvio/general/token_melhorenvio');
+		$this->_is_enable = Mage::getStoreConfig('carriers/melhorenvio/active');
 	}
 
 	public function getEnvironment(){
@@ -428,7 +427,7 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 	 */
 	public function isEnabledMelhorEnvio()
     {
-        return Mage::getStoreConfig(self::ENABLE_MELHORENVIO);
+        return $this->_is_enable;
     }
 
 	/**
@@ -438,7 +437,7 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 	 */
     public function getToken()
     {
-        return Mage::getStoreConfig(self::TOKEN_MELHORENVIO);
+        return $this->_token;
     }
 
 	/**
@@ -448,11 +447,11 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 	 */
     public function getDate()
     {
-        $this->token = self::getToken();
+        $token = $this->getToken();
         $date_expire = null;
     
-        if($this->token){
-            $tokenParts = explode(".", $this->token);
+        if($token){
+            $tokenParts = explode(".", $token);
             $tokenPayload = isset($tokenParts[1]) ? json_decode(base64_decode($tokenParts[1])) : null;
             $date_expire = $tokenPayload->exp;
         }
