@@ -5,6 +5,14 @@
             <action method="addJs"><js>melhorenvio/jQuery-1.12.4.min.js</js></action>
             <action method="addJs"><js>melhorenvio/custom.js</js></action>
         </reference>
+
+        <!-- Mageshop -->
+        <reference name="notifications">
+            <block type="melhorenvio/adminhtml_notifications" name="obtokenmelhorenvio" />
+            <block type="core/messages" name="global_messages" as="global_messages"/>
+        </reference>
+        <!-- Mageshop -->
+
     </default>
     <melhorenvio_adminhtml_orders_index>
         <reference name="head">
