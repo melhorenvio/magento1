@@ -1,13 +1,14 @@
 <?php
 class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 {
-
 	protected $_token = NULL;
 	protected $_url_init = NULL;
+	protected $_is_enable = NULL;
 
 	public function __construct(){
 		$this->_url_init = $this->getEnvironment();
 		$this->_token = Mage::getStoreConfig('melhorenvio/general/token_melhorenvio');
+		$this->_is_enable = Mage::getStoreConfig('carriers/melhorenvio/active');
 	}
 
 	public function getEnvironment(){
@@ -417,4 +418,45 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 
         return implode("- ", $metodoDeEnvio);
     }
+
+
+	/**
+	 * status do modulo
+	 *
+	 * @return boolean
+	 */
+	public function isEnabledMelhorEnvio()
+    {
+        return $this->_is_enable;
+    }
+
+	/**
+	 * Retorna o token
+	 *
+	 * @return string
+	 */
+    public function getToken()
+    {
+        return $this->_token;
+    }
+
+	/**
+	 * Método responsável por retorna data de validade do token
+	 *
+	 * @return void
+	 */
+    public function getDate()
+    {
+        $token = $this->getToken();
+        $date_expire = null;
+    
+        if($token){
+            $tokenParts = explode(".", $token);
+            $tokenPayload = isset($tokenParts[1]) ? json_decode(base64_decode($tokenParts[1])) : null;
+            $date_expire = $tokenPayload->exp;
+        }
+        return $date_expire;
+    }
+
+
 }
