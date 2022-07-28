@@ -158,56 +158,67 @@ class NovaPC_Melhorenvio_Helper_Data extends Mage_Core_Helper_Abstract
 	}
 
 	public function calcularFrete($servicos, $assegurar_valor, $toCep = null, $fromCep = null, $quote = null){
-		foreach ($quote->getAllItems() as $key => $item) {
-            $produto = Mage::getModel('catalog/product')->load($item->getProduct()->getId());
-			
-            if ($item instanceof Mage_Sales_Model_Quote_Item)
-            {
-            	$qty = $item->getQty ();
-            }
-            elseif ($item instanceof Mage_Sales_Model_Order_Item)
-            {
-            	$qty = $item->getShipped () ? $item->getShipped () : $item->getQtyInvoiced ();
-            	if ($qty == 0) {
-            	    $qty = $item->getQtyOrdered();
-            	}
-            }
 
-            $products[$key] = array(
-                "id" => $item->getProduct()->getId(),
-                "weight" => $produto->getData('weight'),
-                "height" => $produto->getData('altura'),
-                "length" => $produto->getData('largura'),
-                "width" => $produto->getData('comprimento'),
-                "quantity" => (int)$qty,
-                "insurance_value" => ($assegurar_valor ? $item->getPrice() : 0),
-            );
+		foreach ($quote->getAllItems() as $key => $item) {
+
+			$produto = Mage::getModel('catalog/product')->load($item->getProduct()->getId());
+
+			if ($item instanceof Mage_Sales_Model_Quote_Item) {
+
+				$qty = $item->getQty();
+
+			} elseif ($item instanceof Mage_Sales_Model_Order_Item) {
+
+				$qty = $item->getShipped() ? $item->getShipped() : $item->getQtyInvoiced();
+
+				if ($qty == 0) {
+
+					$qty = $item->getQtyOrdered();
+					
+				}
+			}
+
+			$sku = $item->getProduct()->getSku();
+
+			if (isset($products[$sku])) {
+				$products[$sku]['insurance_value'] = (($assegurar_valor && ($item->getPrice() > 0)) ? $item->getPrice() : $products[$sku]['insurance_value']);
+			} else {
+				$products[$sku] = array(
+					"id" => $item->getProduct()->getId(),
+					"weight" => $produto->getData('weight'),
+					"height" => $produto->getData('altura'),
+					"length" => $produto->getData('largura'),
+					"width" => $produto->getData('comprimento'),
+					"quantity" => (int)$qty,
+					"insurance_value" => ($assegurar_valor ? $item->getPrice() : 0),
+				);
+			}
 		}
 
-        $params = array(
-            "from" => array(
-                "postal_code" => $fromCep,
-                "address" => "",
-                "number" => "",
-            ),
-            "to" => array(
-                "postal_code" => $toCep,
-                "address" => "",
-                "number" => "",
-            ),
-            "products" => $products,
-            "options" => array(
-                "receipt" => (Mage::getStoreConfig('carriers/melhorenvio/aviso_de_recebimento') == 0) ? false : true,
-                "own_hand" => (Mage::getStoreConfig('carriers/melhorenvio/mao_propria') == 1) ? true : false,
-                "collect" => false,
-            ),
-            "services" => $servicos,
+		$params = array(
+			"from" => array(
+				"postal_code" => $fromCep,
+				"address" => "",
+				"number" => "",
+			),
+			"to" => array(
+				"postal_code" => $toCep,
+				"address" => "",
+				"number" => "",
+			),
+			"products" => $products,
+			"options" => array(
+				"receipt" => (Mage::getStoreConfig('carriers/melhorenvio/aviso_de_recebimento') == 0) ? false : true,
+				"own_hand" => (Mage::getStoreConfig('carriers/melhorenvio/mao_propria') == 1) ? true : false,
+				"collect" => false,
+			),
+			"services" => $servicos,
 		);
 
-        $url = $this->_url_init."api/v2/me/shipment/calculate";
+		$url = $this->_url_init . "api/v2/me/shipment/calculate";
 		$ret = $this->webServiceRequest($url, $params, "POST");
-		
-        return $ret;
+
+		return $ret;
 	}
 
 	public function getCalculoFrete($toCep = null, $fromCep = null, $quote = null){
