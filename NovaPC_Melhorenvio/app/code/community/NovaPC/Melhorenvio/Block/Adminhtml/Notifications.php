@@ -44,6 +44,6 @@ class NovaPC_Melhorenvio_Block_Adminhtml_Notifications extends Mage_Adminhtml_Bl
                 Mage::getSingleton('core/session')->{$ms['type']}($ms['message']);
             }
         }
-        return $this;
+        return parent::_toHtml();
     }
 }
